@@ -6,37 +6,41 @@ package model;
 
 public class PessoaFisica extends Pessoa {
     private String cpf;
-    private int idade;
 
+    // Construtor padrão
     public PessoaFisica() {}
 
-    public PessoaFisica(int id, String nome, String cpf, int idade) {
-        super(id, nome);
+    // Construtor com parâmetros
+    public PessoaFisica(int id, String nome, String logradouro, String cidade, String estado, String telefone, String email, String cpf) {
+        super(id, nome, logradouro, cidade, estado, telefone, email);
         this.cpf = cpf;
-        this.idade = idade;
     }
 
+    // Getter para CPF
     public String getCpf() {
         return cpf;
     }
 
+    // Setter para CPF com validação (opcional)
     public void setCpf(String cpf) {
+        if (cpf == null || cpf.length() != 14) { // Exemplo de validação simples
+            throw new IllegalArgumentException("CPF inválido. Deve ter 14 caracteres no formato 000.000.000-00.");
+        }
         this.cpf = cpf;
     }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
+     // Sobrescreve o método exibir para adicionar o CPF
     @Override
     public void exibir() {
-        super.exibir();
+        super.exibir(); // Exibe os atributos herdados de Pessoa
         System.out.println("CPF: " + cpf);
-        System.out.println("Idade: " + idade);
     }
+    // Sobrescreve toString para representação textual
+    @Override
+    public String toString() {
+        return super.toString() + ", CPF: " + cpf;
+    }
+    
 }
+
+
 
